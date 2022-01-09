@@ -1,4 +1,5 @@
 using System.IO;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,46 +11,43 @@ namespace GamestureInterviewTask
         private Transform defaultParent;
         [SerializeField]
         private ImageEntityFactory imageEntityFactory;
-        private Dictionary<string,ImageEntity> imageEntities = new Dictionary<string, ImageEntity>();
-        private List<string> tmpKeys = new List<string>();
+        private Dictionary<FileInfo,ImageEntity> imageEntities = new Dictionary<FileInfo, ImageEntity>();
+        private List<FileInfo> tmpKeys = new List<FileInfo>();
 
         public void CreateImageEntity(FileInfo fileInfo)
         {
             ImageEntity imageEntity = imageEntityFactory.GetImageEntity(fileInfo, defaultParent);
-            imageEntities.Add(fileInfo.FullName, imageEntity);
+            imageEntities.Add(fileInfo, imageEntity);
         }
 
         public void RemoveImageEntity(FileInfo fileInfo)
         {
-            RemoveImageEntity(fileInfo.FullName);
-        }
-
-        public void RemoveImageEntity(string path)
-        {
-            if(imageEntities.TryGetValue(path, out ImageEntity imageEntity))
+            if(imageEntities.TryGetValue(fileInfo, out ImageEntity imageEntity))
             {
                 Destroy(imageEntity.gameObject);
-                imageEntities.Remove(path);
+                imageEntities.Remove(fileInfo);
             }
         }
 
         public void Synchronize(IReadOnlyDictionary<string, FileInfo> fileInfos)
         {
-            foreach(var fileInfoKey in fileInfos.Keys)
+            foreach(var fileInfoValue in fileInfos.Values)
             {
-                if(!imageEntities.ContainsKey(fileInfoKey))
+                if(!imageEntities.ContainsKey(fileInfoValue))
                 {
-                    CreateImageEntity(fileInfos[fileInfoKey]);
+                    CreateImageEntity(fileInfoValue);
                 }
-            }
 
+            }
             tmpKeys.Clear();
             foreach(var imageEntityKey in imageEntities.Keys)
             {
-                if(!fileInfos.ContainsKey(imageEntityKey))
-                {
-                    tmpKeys.Add(imageEntityKey);
-                }
+                tmpKeys.Add(imageEntityKey);
+            }
+
+            foreach(var value in fileInfos.Values)
+            {
+                tmpKeys.Remove(value);
             }
 
             foreach(var keyToRemove in tmpKeys)
