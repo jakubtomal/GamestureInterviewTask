@@ -15,10 +15,14 @@ namespace GamestureInterviewTask
         private string relativePath;
         [SerializeField]
         private string fileFormat;
+        [SerializeField]
+        private bool refreshOnEnable;
         private string path;
         private Dictionary<string, FileInfo> fileInfos = new Dictionary<string, FileInfo>();
         private List<string> files = new List<string>();
         private List<string> filesToRemove = new List<string>();
+
+        public IReadOnlyDictionary<string, FileInfo> ReadOnlyFilesInfo { get => fileInfos; }
 
         public Action<FileInfo> OnFileAdded;
         public Action<FileInfo> OnFileRemoved;
@@ -26,6 +30,7 @@ namespace GamestureInterviewTask
         private void OnEnable()
         {
             path = Application.dataPath + relativePath;
+            if(refreshOnEnable) RefreshData();
         }
 
         [ContextMenu("Refresh Data")]
