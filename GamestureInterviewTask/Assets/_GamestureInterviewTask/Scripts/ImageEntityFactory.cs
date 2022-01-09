@@ -11,18 +11,22 @@ namespace GamestureInterviewTask
         [SerializeField]
         private ImageEntity prefab;
 
-
-        public ImageEntity CreateImageEntity(FileInfo fileInfo)
+        public void CreateImageEntity(FileInfo fileInfo)
         {
-            return CreateImageEntity(fileInfo.Name, fileInfo.CreationTime.ToLongDateString(), FileConverter.ToTexture2D(fileInfo), defaultParent);
+            GetImageEntity(fileInfo);
         }
 
-        public ImageEntity CreateImageEntity(FileInfo fileInfo, Transform parent)
+        public ImageEntity GetImageEntity(FileInfo fileInfo)
         {
-            return CreateImageEntity(fileInfo.Name, fileInfo.CreationTime.ToLongDateString(), FileConverter.ToTexture2D(fileInfo),parent);
+            return GetImageEntity(fileInfo.Name, fileInfo.CreationTime.ToLongDateString(), FileConverter.ToTexture2D(fileInfo), defaultParent);
         }
 
-        public ImageEntity CreateImageEntity(string title, string creationDate, Texture2D texture, Transform parent)
+        public ImageEntity GetImageEntity(FileInfo fileInfo, Transform parent)
+        {
+            return GetImageEntity(fileInfo.Name, fileInfo.CreationTime.ToLongDateString(), FileConverter.ToTexture2D(fileInfo),parent);
+        }
+
+        public ImageEntity GetImageEntity(string title, string creationDate, Texture2D texture, Transform parent)
         {
             ImageEntity imageEntity = Instantiate(prefab, parent);
             imageEntity.SetData(title, creationDate, texture);
