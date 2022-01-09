@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b609e0492c9be24eb712d4f3e8350df, type: 3}
   m_Name: FileDataContainer
   m_EditorClassIdentifier: 
-  relativePath: /Images
+  relativePath: /_GamestureInterviewTask/Images
   fileFormat: '*.png'
