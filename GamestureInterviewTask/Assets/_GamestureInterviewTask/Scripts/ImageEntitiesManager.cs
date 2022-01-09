@@ -57,5 +57,13 @@ namespace GamestureInterviewTask
                 imageEntities.Remove(keyToRemove);
             }
         }
+
+        public void RefreshAllImageEntities()
+        {
+            foreach(var imageEntity in imageEntities.Values)
+            {
+                imageEntity.RefreshData();
+            }
+        }
     }
 }

@@ -6,6 +6,7 @@ namespace GamestureInterviewTask
 {
     public class ImageEntity : MonoBehaviour
     {
+        private System.DateTime creationTime;
         private string title;
         public string Title
         {
@@ -19,17 +20,17 @@ namespace GamestureInterviewTask
                 OnTitleChanged?.Invoke(title);
             }
         }
-        private string creationDate;
-        public string CreationDate
+        private string timeFromCreation;
+        public string TimeFromCreation
         {
             get
             {
-                return creationDate;
+                return timeFromCreation;
             }
             private set
             {
-                creationDate = value;
-                OnCreationDateChanged?.Invoke(creationDate);
+                timeFromCreation = value;
+                OnCreationDateChanged?.Invoke(timeFromCreation);
             }
         }
         private Texture2D texture;
@@ -50,11 +51,23 @@ namespace GamestureInterviewTask
         public UnityEvent<string> OnCreationDateChanged;
         public UnityEvent<Texture2D> OnSpriteChanged;
 
-        public void SetData(string title, string creationDate, Texture2D texture)
+        public void SetData(string title, System.DateTime creationTime, Texture2D texture)
         {
             Title = title;
-            CreationDate = creationDate;
+            this.creationTime = creationTime;
             Texture = texture;
+            RefreshData();
         }
+
+        public void SetData(FileInfo fileInfo, Texture2D texture)
+        {
+            SetData(fileInfo.Name, fileInfo.CreationTime, texture);
+        }
+
+        public void RefreshData()
+        {
+            TimeFromCreation = (System.DateTime.Now - creationTime).ToString();
+        }
+        
     }
 }
