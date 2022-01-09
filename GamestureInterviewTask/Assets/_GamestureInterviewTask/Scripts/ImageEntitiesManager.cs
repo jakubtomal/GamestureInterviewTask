@@ -22,7 +22,7 @@ namespace GamestureInterviewTask
         {
             if(imageEntities.TryGetValue(fileInfo.FullName, out ImageEntity imageEntity))
             {
-                Destroy(imageEntity);
+                Destroy(imageEntity.gameObject);
                 imageEntities.Remove(fileInfo.FullName);
             }
         }
