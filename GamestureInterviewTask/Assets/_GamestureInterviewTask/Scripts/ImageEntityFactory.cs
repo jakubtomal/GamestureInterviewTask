@@ -4,21 +4,16 @@ using GamestureInterviewTask.Utilities;
 
 namespace GamestureInterviewTask
 {
-    public class ImageEntityFactory : MonoBehaviour
+    [CreateAssetMenu(fileName = "ImageEntityFactory", menuName = "GamestureInterviewTask/ImageEntityFactory")]
+    public class ImageEntityFactory : ScriptableObject
     {
-        [SerializeField]
-        private Transform defaultParent;
+
         [SerializeField]
         private ImageEntity prefab;
 
-        public void CreateImageEntity(FileInfo fileInfo)
-        {
-            GetImageEntity(fileInfo);
-        }
-
         public ImageEntity GetImageEntity(FileInfo fileInfo)
         {
-            return GetImageEntity(fileInfo.Name, fileInfo.CreationTime.ToLongDateString(), FileConverter.ToTexture2D(fileInfo), defaultParent);
+            return GetImageEntity(fileInfo.Name, fileInfo.CreationTime.ToLongDateString(), FileConverter.ToTexture2D(fileInfo), null);
         }
 
         public ImageEntity GetImageEntity(FileInfo fileInfo, Transform parent)

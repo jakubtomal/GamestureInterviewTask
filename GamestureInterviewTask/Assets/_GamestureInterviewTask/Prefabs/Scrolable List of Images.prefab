@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 5065674225713496820}
   - component: {fileID: 5065674225713496819}
   - component: {fileID: 5065674225713496818}
-  - component: {fileID: 658237133681577282}
   - component: {fileID: 1389742049313312976}
+  - component: {fileID: 8021693849356650737}
   m_Layer: 5
   m_Name: Scrolable List of Images
   m_TagString: Untagged
@@ -123,20 +123,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
---- !u!114 &658237133681577282
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5065674225713496816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59f4f11517aab5d4db98afca519d7a17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultParent: {fileID: 5065674225892425610}
-  prefab: {fileID: 4180068746324847555, guid: c0bd899a15c2fc34a8bdf1d24e656ae2, type: 3}
 --- !u!114 &1389742049313312976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,8 +139,8 @@ MonoBehaviour:
   OnFileAdded:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 658237133681577282}
-        m_TargetAssemblyTypeName: GamestureInterviewTask.ImageEntityFactory, Assembly-CSharp
+      - m_Target: {fileID: 8021693849356650737}
+        m_TargetAssemblyTypeName: GamestureInterviewTask.ImageEntitiesManager, Assembly-CSharp
         m_MethodName: CreateImageEntity
         m_Mode: 0
         m_Arguments:
@@ -167,7 +153,33 @@ MonoBehaviour:
         m_CallState: 2
   OnFileRemoved:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8021693849356650737}
+        m_TargetAssemblyTypeName: GamestureInterviewTask.ImageEntitiesManager, Assembly-CSharp
+        m_MethodName: RemoveImageEntity
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &8021693849356650737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5065674225713496816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90ae8c4f8e3752846be14a05175fcd85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultParent: {fileID: 5065674225892425610}
+  imageEntityFactory: {fileID: 11400000, guid: 6832d214a961d834baad9219f7a4c890, type: 2}
 --- !u!1 &5065674225892425609
 GameObject:
   m_ObjectHideFlags: 0
